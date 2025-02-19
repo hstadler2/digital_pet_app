@@ -1,7 +1,5 @@
-import 'dart:async';  // Import dart:async to use Timer
-import 'package:flutter/material.dart';
-
-// Julia Wei Harry Stadler
+import 'dart:async';  // Import dart:async to use Timer for scheduling repetitive tasks
+import 'package:flutter/material.dart';  // Importing Flutter material package for UI components
 
 void main() {
   runApp(MaterialApp(
@@ -15,17 +13,17 @@ class DigitalPetApp extends StatefulWidget {
 }
 
 class _DigitalPetAppState extends State<DigitalPetApp> {
-  String petName = "Your Pet";
-  int happinessLevel = 50;
-  int hungerLevel = 50;
-  Timer? _timer;  // Timer to increase hunger level over time
+  String petName = "Your Pet";  // Variable to store the pet's name
+  int happinessLevel = 50;  // Variable to store the pet's happiness level
+  int hungerLevel = 50;  // Variable to store the pet's hunger level
+  Timer? _timer;  // Timer to manage automatic hunger increase over time
 
-  // Textbox for Name
-  final myController = TextEditingController();
+  final myController = TextEditingController();  // Controller for the pet name text field
 
   @override
   void initState() {
     super.initState();
+    // Setting up a timer to periodically increase the pet's hunger
     _timer = Timer.periodic(Duration(seconds: 30), (timer) {
       setState(() {
         hungerLevel = (hungerLevel + 5).clamp(0, 100);
@@ -35,23 +33,26 @@ class _DigitalPetAppState extends State<DigitalPetApp> {
 
   @override
   void dispose() {
-    _timer?.cancel();
+    _timer?.cancel();  // Cancelling the timer when the widget is disposed
     super.dispose();
   }
 
   Color getPetColor() {
-    if (happinessLevel > 70) return Colors.green;    // Happy
-    if (happinessLevel < 30) return Colors.red;      // Unhappy
-    return Colors.yellow;                            // Neutral
+    // Determines the pet's color based on happiness level
+    if (happinessLevel > 70) return Colors.green;  // Green when happy
+    if (happinessLevel < 30) return Colors.red;    // Red when unhappy
+    return Colors.yellow;                          // Yellow when neutral
   }
 
   String getMoodIcon() {
-    if (happinessLevel > 70) return '😃';            // Happy
-    if (happinessLevel < 30) return '😢';            // Unhappy
-    return '😐';                                    // Neutral
+    // Returns an emoji representing the pet's mood based on happiness level
+    if (happinessLevel > 70) return '😃';  // Happy
+    if (happinessLevel < 30) return '😢';  // Unhappy
+    return '😐';                          // Neutral
   }
 
   void _playWithPet() {
+    // Method to increase happiness and adjust hunger when playing with the pet
     setState(() {
       happinessLevel = (happinessLevel + 10).clamp(0, 100);
       _updateHunger();
@@ -59,6 +60,7 @@ class _DigitalPetAppState extends State<DigitalPetApp> {
   }
 
   void _feedPet() {
+    // Method to decrease hunger and adjust happiness when feeding the pet
     setState(() {
       hungerLevel = (hungerLevel - 10).clamp(0, 100);
       _updateHappiness();
@@ -66,6 +68,7 @@ class _DigitalPetAppState extends State<DigitalPetApp> {
   }
 
   void _updateHappiness() {
+    // Adjusts happiness based on the current hunger level
     if (hungerLevel < 30) {
       happinessLevel = (happinessLevel - 20).clamp(0, 100);
     } else {
@@ -74,6 +77,7 @@ class _DigitalPetAppState extends State<DigitalPetApp> {
   }
 
   void _updateHunger() {
+    // Method to incrementally increase hunger over time
     hungerLevel = (hungerLevel + 5).clamp(0, 100);
     if (hungerLevel > 100) {
       hungerLevel = 100;
@@ -85,7 +89,7 @@ class _DigitalPetAppState extends State<DigitalPetApp> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Digital Pet'),
+        title: Text('Digital Pet'),  // Title in the app bar
       ),
       body: Center(
         child: Column(
@@ -95,7 +99,7 @@ class _DigitalPetAppState extends State<DigitalPetApp> {
               'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS4GA8fjB5zYPwpvr7CUTo1k-WK08iRoAu2mg&s',
               height: 200,
               width: 200,
-              color: getPetColor(),  // Apply dynamic color based on happiness level
+              color: getPetColor(),  // Color overlay based on pet's mood
             ),
             SizedBox(height: 16.0),
             Text(
@@ -106,7 +110,7 @@ class _DigitalPetAppState extends State<DigitalPetApp> {
             Text(
               'Happiness Level: $happinessLevel ${getMoodIcon()}',
               style: TextStyle(fontSize: 20.0),
-            ),q
+            ),
             SizedBox(height: 16.0),
             Text(
               'Hunger Level: $hungerLevel',
@@ -140,11 +144,6 @@ class _DigitalPetAppState extends State<DigitalPetApp> {
           ],
         ),
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: const Icon(Icons.add),
-      ), // This trailing comma makes auto-formatting nicer for build methods.
     );
   }
 }
