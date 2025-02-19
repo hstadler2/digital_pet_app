@@ -19,6 +19,7 @@ class _DigitalPetAppState extends State<DigitalPetApp> {
   int hungerLevel = 50;
   // Textbox for Name
   final myController = TextEditingController();
+  String _gameState = "Pet is currently Alive";
 
   // Function to increase happiness and update hunger when playing with the pet
   void _playWithPet() {
@@ -110,6 +111,26 @@ class _DigitalPetAppState extends State<DigitalPetApp> {
                 },
               ),
             ),
+
+// Implement a win condition where the player "wins" if the happiness level remains above 80 for a certain duration (e.g., 3 minutes).
+// Implement a loss condition if the hunger level reaches 100 and the happiness level drops to 10, displaying a "Game Over" message.
+
+            ElevatedButton(
+              onPressed: () {
+                setState(() {
+                  if (happinessLevel > 80) {
+                    _gameState = "You Win!";
+                  }
+                  if (hungerLevel == 100 && happinessLevel < 11) {
+                    _gameState = "Game Over";
+
+                  }
+                });
+              },
+              child: Text("$_gameState"),
+              
+              ),
+
           ],
         ),
       ),
