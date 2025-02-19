@@ -1,6 +1,8 @@
 import 'dart:async';  // Import dart:async to use Timer
 import 'package:flutter/material.dart';
 
+// Julia Wei Harry Stadler
+
 void main() {
   runApp(MaterialApp(
     home: DigitalPetApp(),
@@ -104,7 +106,7 @@ class _DigitalPetAppState extends State<DigitalPetApp> {
             Text(
               'Happiness Level: $happinessLevel ${getMoodIcon()}',
               style: TextStyle(fontSize: 20.0),
-            ),
+            ),q
             SizedBox(height: 16.0),
             Text(
               'Hunger Level: $hungerLevel',
@@ -138,6 +140,11 @@ class _DigitalPetAppState extends State<DigitalPetApp> {
           ],
         ),
       ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: _incrementCounter,
+        tooltip: 'Increment',
+        child: const Icon(Icons.add),
+      ), // This trailing comma makes auto-formatting nicer for build methods.
     );
   }
 }
