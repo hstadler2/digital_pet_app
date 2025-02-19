@@ -144,6 +144,7 @@ class _DigitalPetAppState extends State<DigitalPetApp> {
           ],
         ),
       ),
+      //Tried adding the win/loss condition julia made here, but coulnd't get her code to work without missing deadline
     );
   }
 }
