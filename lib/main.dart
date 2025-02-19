@@ -15,6 +15,8 @@ class _DigitalPetAppState extends State<DigitalPetApp> {
   String petName = "Your Pet";
   int happinessLevel = 50;
   int hungerLevel = 50;
+  // Textbox for Name
+  final myController = TextEditingController();
 
   // Function to increase happiness and update hunger when playing with the pet
   void _playWithPet() {
@@ -89,6 +91,22 @@ class _DigitalPetAppState extends State<DigitalPetApp> {
             ElevatedButton(
               onPressed: _feedPet,
               child: Text('Feed Your Pet'),
+            ),
+              // Text Field to enter pet name
+              Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: TextField(
+                controller: myController,
+                decoration: InputDecoration(
+                  border: OutlineInputBorder(),
+                  labelText: 'Enter Pet Name',
+                ),
+                onSubmitted: (String value) {
+                  setState(() {
+                    petName = value;
+                  });
+                },
+              ),
             ),
           ],
         ),
