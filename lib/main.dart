@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+// Julia Wei Harry Stadler
+
 void main() {
   runApp(MaterialApp(
     home: DigitalPetApp(),
